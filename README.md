@@ -1,0 +1,4 @@
+# Blog
+
+example rails application
+

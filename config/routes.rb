@@ -1,4 +1,10 @@
 Blog::Application.routes.draw do
+  resources :tags
+
+  resources :posts do
+    resources :comments, only: [:create, :destroy]
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
