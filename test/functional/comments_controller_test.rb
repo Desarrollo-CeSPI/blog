@@ -2,48 +2,35 @@ require 'test_helper'
 
 class CommentsControllerTest < ActionController::TestCase
   setup do
-    @comment = comments(:one)
+    @post = posts(:post_one)
+    @comment = comments(:comment_one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:comments)
-  end
+  test "should not create comment with blank fields" do
+    assert_no_difference('Comment.count') do
+      post :create, post_id: @post.id, comment: { content: '', name: '' }
+    end
 
-  test "should get new" do
-    get :new
     assert_response :success
+
+    assert_equal 2, assigns(:comment).errors.size 
+    assert_present assigns(:comment).errors[:content]
+    assert_present assigns(:comment).errors[:name]
   end
 
   test "should create comment" do
     assert_difference('Comment.count') do
-      post :create, comment: { content: @comment.content, name: @comment.name }
+      post :create, post_id: @post.id, comment: { content: @comment.content, name: @comment.name }
     end
 
-    assert_redirected_to comment_path(assigns(:comment))
-  end
-
-  test "should show comment" do
-    get :show, id: @comment
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @comment
-    assert_response :success
-  end
-
-  test "should update comment" do
-    put :update, id: @comment, comment: { content: @comment.content, name: @comment.name }
-    assert_redirected_to comment_path(assigns(:comment))
+    assert_redirected_to post_path(@post)
   end
 
   test "should destroy comment" do
     assert_difference('Comment.count', -1) do
-      delete :destroy, id: @comment
+      delete :destroy, post_id: @post.id, id: @comment
     end
 
-    assert_redirected_to comments_path
+    assert_redirected_to post_path(@post)
   end
 end
