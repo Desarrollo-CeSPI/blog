@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
+post_one:
   title: Post one
   content: MyText
 
-two:
+post_two:
   title: Post two
   content: MyText

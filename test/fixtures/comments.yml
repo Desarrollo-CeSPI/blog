@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
+comment_one:
   name: MyString
   content: MyText
-  post: 
+  post: post_one
 
-two:
+comment_two:
   name: MyString
   content: MyText
-  post: 
+  post: post_one
